@@ -11,8 +11,8 @@ input{
 </head>
 <body>
 <form id="user-form" action="#" method="post" enctype="text/plain">
-Email:      <input type="email" id="emailField" required> <br>
-Tel:        <input type="tel" id="phoneField" required> <br>
+<!--Email:      <input type="email" id="emailField" required> <br>
+Tel:        <input type="tel" id="phoneField" required> <br>-->
 Password:   <input type="password" id="password1" required> <br>
 Password2:  <input type="password" id="password2" required><br> <input type="submit" value="Send!"> </form>
 <script>
@@ -30,14 +30,16 @@ Password2:  <input type="password" id="password2" required><br> <input type="sub
 		if(pass1Val&&pass2Val&&(pass1Val!=pass2Val)){
 			pass2.setCustomValidity("The password  confirmation is different to the password value");
 			return false;
-		}       
+		}else 
+			pass2.setCustomValidity("");       
 	}
 	
 	if(pass1 && pass2){
 		pass1.addEventListener('change', validateForm, false);
-		pass2.addEventListener('change', validateForm, false);
-	
-		validateForm();
+		pass2.addEventListener('change', validateForm, false);	
+		return validateForm();
+	}else { 
+		pass2.setCustomValidity(""); 
 	}
 })();
 
