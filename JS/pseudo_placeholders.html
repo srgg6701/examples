@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Check fields</title>
+<style>
+*{
+	box-sizing:border-box;
+}
+form,
+form input[type="text"],
+form input[type="password"]{
+	float:left;
+}
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+input[type="password"]{
+	border:solid 1px #CCC;
+	margin:2px 4px 0 0;
+	padding:2px 4px;
+	width:50%;
+}
+input[id*="password"]{
+	background-color: #FFDFFF;
+}
+form input[type="text"]:nth-child(even),
+form input[type="password"]:nth-child(even){
+	margin-right: -4px;
+}
+form input[type="text"]:nth-child(2),
+form input[type="password"]:nth-child(2){
+	
+}
+body form:nth-child(odd){
+	clear:left;
+}
+form{
+	display:inline-block;
+	margin:10px;
+	width:220px;
+}
+form:after{
+	content:" ";
+	display:block;
+	clear:both;
+}
+button{
+	clear:both;
+	display:block;
+	float:left;
+	margin-top: 4px;
+}
+</style>
+<script src="../jquery-1.10.2.min.js"></script>
+<script>
+/* ACHTUNG! It demands jQuery 1.10x	*/
+$(function(){
+	$('input').each(function(index, element) {
+        $(element).val(element.id);
+    });
+	$('[id*="password"]').on('click keyup', function(){
+		var val = this.value;
+		var dVal= $(this).attr('data-default_value');
+		if(val==dVal||!val)
+			$(this).attr('type','text');
+		else
+			$(this).attr('type','password');
+			
+		console.log('current value = '+val+', default value = '+$(this).attr('data-default_value'));
+		
+	}).one('focus', function(){
+		$(this).attr('data-default_value',this.value);
+	}).on('blur', function(){
+		if(!$(this).val())
+			$(this).val($(this).attr('data-default_value'));
+	});
+});
+</script>
+</head>
+<body>
+<form>
+    <!-- password fields -->
+    <input type="text" 	id="password" 			name="password" required />
+    <input type="text" 	id="current_password"	name="current_password" required />
+    <input type="text" 	id="new_password"		name="new_password" required />
+    <input type="text" 	id="retype_password" 	name="retype_password" required />
+	<br>
+	<button type="submit">submit!</button>
+</form>
