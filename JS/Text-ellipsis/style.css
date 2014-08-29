@@ -1,0 +1,12 @@
+article{
+	background-color:#fff;
+	box-sizing:border-box;
+	height: 202px;
+	margin-bottom:10px;
+	overflow: hidden;
+	padding: 0 10px;
+	width: 65%;
+}
+body{
+	background-color:#ddd;
+}
